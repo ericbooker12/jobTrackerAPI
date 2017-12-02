@@ -6,10 +6,20 @@ i = 1
 50.times do
 
 	# position = positions[index.rand(0..positions.length - 1)]
-	j = Job.create!(title: Faker::Simpsons.character, company: Faker::Simpsons.location, date_applied: Faker::Date.between(30.days.ago, Date.today), resume_sent: true, cover_letter_sent: true)
+	Job.create!(
+		title: Faker::Company.profession,
+		company: Faker::Company.name,
+		date_applied: Faker::Date.between(30.days.ago, Date.today),
+		resume_sent: i.even?,
+		cover_letter_sent: i%3==0
+	)
+	i += 1
 end
 
-100.times do
-	note = Note.create!(content: Faker::Simpsons.quote, job_id: rand(1...50))
-	note.save
+2000.times do
+	Note.create!(
+		content: Faker::HitchhikersGuideToTheGalaxy.quote,
+		job_id: rand(1..50)
+	)
+
 end
