@@ -3,8 +3,7 @@ class JobsController < ApplicationController
 
 	# GET /jobs
 	def index
-		p Job.first.id
-		@jobs = Job.all
+		@jobs = Job.order(id: :desc)
 		json_response(@jobs)
 	end
 
@@ -16,7 +15,13 @@ class JobsController < ApplicationController
 
 	# GET /jobs/:id
 	def show
+		@job = Job.find(params[:id])
 		json_response(@job)
+	end
+
+	# GET /jobs/new
+	def new
+		@job = current_user.jobs.build
 	end
 
 	# PUT /jobs/:id
@@ -35,7 +40,7 @@ class JobsController < ApplicationController
 
 	def job_params
 		# whitelist params
-		params.permit(:title, :company, :note)
+		params.require(:job).permit(:title, :company, :date_applied, :resume_sent, :cover_letter_sent, :cover_letter, :resume_file_name, :URL, :rejected, :not_offered)
 	end
 
 	def set_job

@@ -8,13 +8,13 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
-gem 'sqlite3'
 gem 'puma', '~> 3.0'
 gem 'faker', github: 'stympy/faker'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
 
 group :development, :test do
+	gem 'sqlite3'
 	# Call 'byebug' anywhere in the code to stop execution and get a debugger console
 	gem 'byebug', platform: :mri
 	gem 'rspec-rails', '~> 3.5'
@@ -31,6 +31,10 @@ group :test do
 	gem 'factory_girl_rails', '~> 4.0'
 	gem 'shoulda-matchers', '~> 3.1'
 	gem 'database_cleaner'
+end
+
+group :production do
+	gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
